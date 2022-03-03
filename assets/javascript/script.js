@@ -1,7 +1,7 @@
 var question = document.getElementById("question");
 var choices = document.getElementsByClassName("choices");
 var htmlElem = document.getElementById("htmlElem");
-var score = document.getElementsByClassName("score");
+var timer = document.getElementById("timer");
 var startBtn = document.getElementById("startBtn");
 var correctNumbers = 0;
 
@@ -85,6 +85,7 @@ function createQuiz() {
           alert("Correct answer!");
           randomQuestionObj.correct = 1;
           correctNumbers++;
+
           if (correctNumbers < size) {
             createQuiz();
           } else {

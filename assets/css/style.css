@@ -31,13 +31,8 @@
   justify-content: space-evenly;
   flex-direction: column;
 }
-/* .choices { */
-/* display: flex;
-  flex-direction: column; */
-/* justify-content: space-evenly; */
-/* } */
 
-#score {
+#timer {
   position: absolute;
   top: 0;
 }
