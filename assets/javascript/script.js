@@ -1,9 +1,10 @@
 var question = document.getElementById("question");
 var choices = document.getElementsByClassName("choices");
 var htmlElem = document.getElementById("htmlElem");
-var timer = document.getElementById("timer");
 var startBtn = document.getElementById("startBtn");
 var correctNumbers = 0;
+var timer = document.getElementById("timer");
+const startTime = 300; //timer for 5 minutes
 
 var randomFunction = function (obj) {
   var keys = Object.keys(obj);
@@ -97,5 +98,27 @@ function createQuiz() {
         }
       });
     }
+  }
+}
+
+//timer
+const start_Time = 0.5; //timer for 1 minutes
+let time = start_Time * 60;
+
+//timer count down element
+
+const intervalTimer = setInterval(countdown, 1000);
+function countdown() {
+  const minute = Math.floor(time / 60);
+  let second = time % 60;
+  second = second < 10 ? "0" + second : second;
+  timer.innerHTML = `${minute}:${second}`;
+  time--;
+
+  // time = time < 0 ? 0 : time;
+  if (time < 0) {
+    time = time;
+    clearInterval(intervalTimer);
+    alert("time is up");
   }
 }
