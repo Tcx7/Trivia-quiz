@@ -4,8 +4,12 @@ var htmlElem = document.getElementById("htmlElem");
 var startBtn = document.getElementById("startBtn");
 var correctNumbers = 0;
 var timer = document.getElementById("timer");
-const startTime = 300; //timer for 5 minutes
+var bodyClass = document.getElementById("body-content");
+// const startTime = 300; //timer for 5 minutes
+const start_Time = 0.5; //timer for 30 seconds
+let time = start_Time * 60;
 
+// What does it do????????
 var randomFunction = function (obj) {
   var keys = Object.keys(obj);
   return obj[keys[(keys.length * Math.random()) << 0]];
@@ -54,12 +58,34 @@ var Question_Ans = {
   },
 };
 var size = Object.keys(Question_Ans).length;
+// const intervalTimer = setInterval(countdown, 1000);
+function countdown() {
+  const minute = Math.floor(time / 60);
+  let second = time % 60;
+  second = second < 10 ? "0" + second : second;
+  timer.innerHTML = `${minute}:${second}`;
+  time--;
+
+  // time = time < 0 ? 0 : time;
+  if (time < 0) {
+    time = time;
+    clearInterval(intervalTimer);
+    alert("time is up");
+    bodyClass.classList.remove("timerOn");
+  }
+}
 
 startBtn.addEventListener("click", (e) => {
   createQuiz();
 });
 
+// What does it do????????
 function createQuiz() {
+  if (!bodyClass.classList.contains("timerOn")) {
+    const intervalTimer = setInterval(countdown, 1000);
+  }
+  bodyClass.classList.add("timerOn");
+
   htmlElem.innerHTML = "";
   let randomQuestionObj = randomFunction(Question_Ans);
   if (randomQuestionObj.correct === 1) {
@@ -98,27 +124,5 @@ function createQuiz() {
         }
       });
     }
-  }
-}
-
-//timer
-const start_Time = 0.5; //timer for 1 minutes
-let time = start_Time * 60;
-
-//timer count down element
-
-const intervalTimer = setInterval(countdown, 1000);
-function countdown() {
-  const minute = Math.floor(time / 60);
-  let second = time % 60;
-  second = second < 10 ? "0" + second : second;
-  timer.innerHTML = `${minute}:${second}`;
-  time--;
-
-  // time = time < 0 ? 0 : time;
-  if (time < 0) {
-    time = time;
-    clearInterval(intervalTimer);
-    alert("time is up");
   }
 }
